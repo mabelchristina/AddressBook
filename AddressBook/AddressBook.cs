@@ -111,6 +111,14 @@ namespace AddressBook
             }
             DisplayContact();
         }
+        public void AddMultiContacts(int n)
+        {
+            while (n > 0)
+            {
+                CreateContacts();
+                n--;
+            }
+        }
     }
     
 }
