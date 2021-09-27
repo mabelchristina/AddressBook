@@ -6,6 +6,7 @@ namespace AddressBook
 {
     class AddressBook
     {
+        List<Contacts> addcontacts = new List<Contacts>();
         public void CreateContacts()
         {
             Contacts contacts = new Contacts();
