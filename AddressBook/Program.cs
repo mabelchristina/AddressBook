@@ -10,7 +10,7 @@ namespace AddressBook
             int options;
             while (!value)
             {
-                Console.WriteLine("1.CreateContacts\n 2.DisplayContact \n 3.EditContacts\n ");
+                Console.WriteLine("1.CreateContacts\n 2.DisplayContact \n 3.EditContacts\n4.Delete Contacts ");
                 options = Convert.ToInt32(Console.ReadLine());
                 AddressBook address = new AddressBook();
                 switch (options)
@@ -23,6 +23,9 @@ namespace AddressBook
                         break;
                     case 3:
                         address.EditContact();
+                        break;
+                    case 4:
+                        address.DeleteContacts();
                         break;
                     default:
                         Console.WriteLine("Choose valid option");

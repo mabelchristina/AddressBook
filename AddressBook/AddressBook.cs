@@ -91,6 +91,26 @@ namespace AddressBook
             }
             DisplayContact();
         }
+        public void DeleteContacts()
+        {
+            CreateContacts();
+            Console.WriteLine("enter first name to delete contact ");
+            string name = Console.ReadLine();
+            foreach (var data in addcontacts)
+            {
+                if (data.Firstname.Equals(name))
+                {
+                    addcontacts.Remove(data);
+                    Console.WriteLine("contact deleted successfully");
+                }
+                else
+                {
+                    Console.WriteLine("given name contact does not exists");
+                }
+                       
+            }
+            DisplayContact();
+        }
     }
     
 }
