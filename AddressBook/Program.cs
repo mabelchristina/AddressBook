@@ -29,8 +29,7 @@ namespace AddressBook
                         address.DeleteContacts();
                         break;
                     case 5:
-                        Console.WriteLine("Enter the number of contact to be added");
-                        address.AddMultiContacts(Convert.ToInt32(Console.ReadLine()));
+                        address.AddMultiContacts(2);
                         break;
                     default:
                         Console.WriteLine("Choose valid option");
