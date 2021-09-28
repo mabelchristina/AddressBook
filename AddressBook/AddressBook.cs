@@ -53,6 +53,7 @@ namespace AddressBook
                         {
                             case 1:
                                 string lastname = Console.ReadLine();
+                                data.Lastname=lastname;
                                 break;
                             case 2:
                                 string address = Console.ReadLine();
