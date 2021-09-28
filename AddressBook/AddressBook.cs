@@ -7,6 +7,7 @@ namespace AddressBook
     class AddressBook
     {
         List<Contacts> addcontacts = new List<Contacts>();
+        Dictionary<string, List<Contacts>> dictionary = new Dictionary<string, List<Contacts>>();
         public void CreateContacts()
         {
             Contacts contacts = new Contacts();
@@ -30,7 +31,6 @@ namespace AddressBook
         }
         public void DisplayContact()
         {
-            CreateContacts();
             foreach (var data in addcontacts)
             {
                 Console.WriteLine("The Contact Details are\n:" + data.Firstname + " " + data.LastName + " " + data.Address + " " + data.City + " " + data.State + " " + data.Zip + " " + data.PhoneNumber + " " + data.Email);
@@ -38,9 +38,8 @@ namespace AddressBook
         }
         public void EditContact()
         {
-            CreateContacts();
             Console.WriteLine("to edit contact list enter contact firstname");
-            string name = Console.ReadLine().ToLower();
+            string name = Console.ReadLine();
             foreach (var data in addcontacts)
             {
                 if (addcontacts.Contains(data))
@@ -53,6 +52,7 @@ namespace AddressBook
                         {
                             case 1:
                                 string lastname = Console.ReadLine();
+                                data.LastName = lastname;
                                 break;
                             case 2:
                                 string address = Console.ReadLine();
@@ -93,7 +93,6 @@ namespace AddressBook
         }
         public void DeleteContacts()
         {
-            CreateContacts();
             Console.WriteLine("enter first name to delete contact ");
             string name = Console.ReadLine();
             foreach (var data in addcontacts)
@@ -115,8 +114,33 @@ namespace AddressBook
         {
             while (n > 0)
             {
-                CreateContacts();
+                foreach (var data in addcontacts)
+                {
+                    Console.WriteLine("enter firstname of your contactdetails");
+                    string name = Console.ReadLine();
+                    if (data.Firstname == name)
+                    {
+                         Console.WriteLine("enter dictionary name");
+                         string dictinaryName = Console.ReadLine();
+                         dictionary.Add(dictinaryName, addcontacts);
+                    }
+                }
                 n--;
+            }
+        }
+        public void AddressBookInDictionary()
+        {
+            Console.WriteLine("Enter the name of Dictionary");
+            string name = Console.ReadLine();
+            foreach (var contacts in dictionary)
+            {
+                if (contacts.Key.Contains(name))
+                {
+                    foreach (var data in contacts.Value)
+                    {
+                        Console.WriteLine("The Contact Details are\n:" + data.Firstname + " " + data.LastName + " " + data.Address + " " + data.City + " " + data.State + " " + data.Zip + " " + data.PhoneNumber + " " + data.Email);
+                    }
+                }
             }
         }
     }

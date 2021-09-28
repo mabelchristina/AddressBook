@@ -6,13 +6,13 @@ namespace AddressBook
     {
         static void Main(string[] args)
         {
+            AddressBook address = new AddressBook();
             bool value = false;
             int options;
             while (!value)
             {
-                Console.WriteLine("1.CreateContacts\n 2.DisplayContact \n 3.EditContacts\n4.Delete Contacts\n5. MultiContacts Addition ");
+                Console.WriteLine("\n1.CreateContacts\n 2.DisplayContact \n 3.EditContacts\n4.Delete Contacts\n5. MultiContacts Addition\n 6. Display AddressBookInDictionary ");
                 options = Convert.ToInt32(Console.ReadLine());
-                AddressBook address = new AddressBook();
                 switch (options)
                 {
                     case 1:
@@ -28,8 +28,10 @@ namespace AddressBook
                         address.DeleteContacts();
                         break;
                     case 5:
-                        Console.WriteLine("Enter the number of contact to be added");
-                        address.AddMultiContacts(Convert.ToInt32(Console.ReadLine()));
+                        address.AddMultiContacts(2);
+                        break;
+                    case 6:
+                        address.AddressBookInDictionary();
                         break;
                     default:
                         Console.WriteLine("Choose valid option");
