@@ -6,13 +6,14 @@ namespace AddressBook
     {
         static void Main(string[] args)
         {
+            
+            AddressBook address = new AddressBook();
             bool value = false;
             int options;
             while (!value)
             {
                 Console.WriteLine("1.CreateContacts\n 2.DisplayContact \n 3.EditContacts\n4.Delete Contacts\n5. MultiContacts Addition ");
                 options = Convert.ToInt32(Console.ReadLine());
-                AddressBook address = new AddressBook();
                 switch (options)
                 {
                     case 1:
