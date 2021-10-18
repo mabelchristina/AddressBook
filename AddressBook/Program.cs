@@ -5,37 +5,33 @@ namespace AddressBook
     class Program
     {
         static void Main(string[] args)
-        {
-            AddressBook address = new AddressBook();
+        { 
+            AddressBook abd = new AddressBook();
             bool value = false;
-            int options;
             while (!value)
             {
-                Console.WriteLine("\n1.CreateContacts\n 2.DisplayContact \n 3.EditContacts\n4.Delete Contacts\n5. MultiContacts Addition\n 6. Display AddressBookInDictionary ");
-                options = Convert.ToInt32(Console.ReadLine());
-                switch (options)
+                Console.WriteLine("*********************************************************");
+                Console.WriteLine("1.Add member to Contact list \n2.View Members in Contact List\n3.Edit members Contacts list\n4.Delete members Contacts list\n5.Exit");
+                Console.WriteLine("Enter an option:");
+                switch (Convert.ToInt32(Console.ReadLine()))
                 {
                     case 1:
-                        address.CreateContacts();
+                        abd.AddMember();
                         break;
                     case 2:
-                        address.DisplayContact();
+                        abd.ViewContacts();
                         break;
                     case 3:
-                        address.EditContact();
+                        abd.EditDetails();
                         break;
                     case 4:
-                        address.DeleteContacts();
+                        abd.DeleteDetails();
                         break;
                     case 5:
-                        address.AddMultiContacts(2);
-                        break;
-                    case 6:
-                        address.AddressBookInDictionary();
-                        break;
-                    default:
-                        Console.WriteLine("Choose valid option");
-                        break;
+                        // to exit from main method
+                        Console.WriteLine("Exited");
+                        return;
+
                 }
             }
         }

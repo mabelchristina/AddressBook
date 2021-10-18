@@ -4,15 +4,22 @@ using System.Text;
 
 namespace AddressBook
 {
-    class Contacts
+    public class Contacts
     {
-        public string Firstname { get; set; }
-        public string LastName { get; set; }
-        public string Address { get; set; }
-        public string City { get; set; }
-        public string State { get; set; }
-        public string Zip { get; set; }
-        public long PhoneNumber { get; set; }
-        public string Email { get; set; }
+        public string firstName { get; set; }
+
+        public string lastName { get; set; }
+
+        public string address { get; set; }
+
+        public string state { get; set; }
+        public string city { get; set; }
+
+        public string zip { get; set; }
+
+        public int phoneNumber { get; set; }
+
+        public string email { get; set; }
+
     }
 }
