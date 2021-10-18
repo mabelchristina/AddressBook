@@ -11,7 +11,8 @@ namespace AddressBook
             while (!value)
             {
                 Console.WriteLine("*********************************************************");
-                Console.WriteLine("1.Add member to Contact list \n2.View Members in Contact List\n3.Edit members Contacts list\n4.Delete members Contacts list\n5.Exit");
+                Console.WriteLine("1.Add member to Contact list \n2.View Members in Contact List\n3.Edit members Contacts list\n4.Delete members Contacts list\n" +
+                    "5.Search by name\n6.Exit\n");
                 Console.WriteLine("Enter an option:");
                 switch (Convert.ToInt32(Console.ReadLine()))
                 {
@@ -28,6 +29,9 @@ namespace AddressBook
                         abd.DeleteDetails();
                         break;
                     case 5:
+                        abd.SearchDetails();
+                        break;
+                    case 6:
                         // to exit from main method
                         Console.WriteLine("Exited");
                         return;
