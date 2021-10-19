@@ -445,6 +445,41 @@ namespace AddressBook
                 Console.WriteLine("This address book doesn't exists ");
             }
         }
+        public void SortByCityStateZip()
+        {
+            Console.Write("Enter the name of address book you want to sort: ");
+            string addressBookName = Console.ReadLine();
+            Console.WriteLine("\nNow enter \n1. To sort by cities \n2. To sort by State \n3. To sort by Zip-Code");
+            int choice = int.Parse(Console.ReadLine());
+            Console.WriteLine();
 
+            if (addressBookDictionary.ContainsKey(addressBookName))
+            {
+                switch (choice)
+                {
+                    case 1:
+                        addressBookDictionary[addressBookName].Sort((x, y) => x.city.CompareTo(y.city));
+                        break;
+
+                    case 2:
+                        addressBookDictionary[addressBookName].Sort((x, y) => x.state.CompareTo(y.state));
+                        break;
+
+                    case 3:
+                        addressBookDictionary[addressBookName].Sort((x, y) => x.zip.CompareTo(y.zip));
+                        break;
+
+                    default:
+                        Console.WriteLine("Please enter valid input.");
+                        break;
+                }
+
+                ViewContacts();
+            }
+            else
+            {
+                Console.WriteLine("This address book doesn't exists");
+            }
+        }
     }
 }

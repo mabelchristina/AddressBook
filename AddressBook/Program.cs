@@ -12,7 +12,7 @@ namespace AddressBook
             {
                 Console.WriteLine("*********************************************************");
                 Console.WriteLine("1.Add member to Contact list \n2.View Members in Contact List\n3.Edit members Contacts list\n4.Delete members Contacts list\n" +
-                    "5.Search by name\n6.Count by state or city\n7.Sort Alphabatically\n8.Exit\n");
+                    "5.Search by name\n6.Count by state or city\n7.Sort Alphabatically\n8. Sort by City ,State or Zip\n9.Exit\n");
                 Console.WriteLine("Enter an option:");
                 switch (Convert.ToInt32(Console.ReadLine()))
                 {
@@ -38,6 +38,9 @@ namespace AddressBook
                         abd.SortEntriesAlphabetically();
                         break;
                     case 8:
+                        abd.SortByCityStateZip();
+                        break;
+                    case 9:
                         // to exit from main method
                         Console.WriteLine("Exited");
                         return;
