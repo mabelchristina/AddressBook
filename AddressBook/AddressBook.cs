@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace AddressBook
@@ -31,6 +33,10 @@ namespace AddressBook
                     {
                         break;
                     }
+                }
+                else
+                {
+                    break;
                 }
             }
             Console.Write("Enter Number of contacts you want to add:");
@@ -423,5 +429,22 @@ namespace AddressBook
                 Console.WriteLine("Adress book is empty");
             }
         }
+        public void SortEntriesAlphabetically()
+        {
+            Console.Write("Enter the name of address book you want to sort: ");
+            string addressBookName = Console.ReadLine();
+
+
+            if (addressBookDictionary.ContainsKey(addressBookName))
+            {
+                addressBookDictionary[addressBookName].Sort((x, y) => x.firstName.CompareTo(y.firstName));
+                ViewContacts();
+            }
+            else
+            {
+                Console.WriteLine("This address book doesn't exists ");
+            }
+        }
+
     }
 }
