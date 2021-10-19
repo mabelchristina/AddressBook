@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -76,8 +77,6 @@ namespace AddressBook
                 contact.state = Console.ReadLine();
                 Console.Write("Enter State: ");
                 contact.state = Console.ReadLine();
-                Console.Write("Enter city: ");
-                contact.city = Console.ReadLine();
                 Console.Write("Enter Zip Code: ");
                 contact.zip = Console.ReadLine();
                 Console.Write("Enter phone Number: ");
@@ -349,12 +348,12 @@ namespace AddressBook
                 case 1:
                     Console.WriteLine("Enter the name of city in which you want to view:");
                     string cityName = Console.ReadLine();
-                    ViewByCityName(cityName,"view");
+                    ViewByCityName(cityName, "view");
                     break;
                 case 2:
                     Console.WriteLine("Enter the state of city in which you want to view:");
                     string stateName = Console.ReadLine();
-                    ViewByStateName(stateName,"view");
+                    ViewByStateName(stateName, "view");
                     break;
                 default:
                     return;
@@ -389,7 +388,7 @@ namespace AddressBook
                 }
             }
             else
-                {
+            {
                 Console.WriteLine("Adress book is empty");
             }
         }
@@ -479,6 +478,77 @@ namespace AddressBook
             else
             {
                 Console.WriteLine("This address book doesn't exists");
+            }
+        }
+        public void ReadFromFile()
+        {
+            string filePath = @"D:\my git\AddressBook\AddressBook\Info.txt";
+            try
+            {
+                string[] fileContents = File.ReadAllLines(filePath);
+                var currentAbName = fileContents[0];
+                contacts = new List<Contacts>();
+                foreach (string i in fileContents.Skip(1))
+                {
+                    if (i.Contains(","))
+                    {
+                        Contacts person = new Contacts();
+                        string[] line = i.Split(",");
+                        person.firstName = line[0];
+                        person.lastName = line[1];
+                        person.address = line[2];
+                        person.city = line[3];
+                        person.state = line[4];
+                        person.zip = line[5];
+                        person.phoneNumber = Convert.ToInt32(line[6]);
+                        person.email = line[7];
+                        contacts.Add(person);
+                    }
+                    else
+                    {
+                        addressBookDictionary.Add(currentAbName, contacts);
+                        currentAbName = i;
+                        contacts = new List<Contacts>();
+                    }
+                }
+                addressBookDictionary.Add(currentAbName, contacts);
+                Console.WriteLine("SuccessFully Added");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+        public void WriteToFile()
+        {
+            string filePath = @"D:\my git\AddressBook\AddressBook\Info.txt";
+
+            try
+            {
+                if (addressBookDictionary.Count > 0)
+                {
+                    File.WriteAllText(filePath, "Hello i added");
+                    //printing the values in address book
+                    foreach (KeyValuePair<string, List<Contacts>> dict in addressBookDictionary)
+                    {
+                        File.AppendAllText(filePath, $"{dict.Key}\n");
+                        foreach (var addressBook in dict.Value)
+                        {
+                            string text = $"{addressBook.firstName},{addressBook.lastName},{addressBook.address}," +
+                                $"{addressBook.city},{addressBook.state},{addressBook.zip},{addressBook.phoneNumber},{addressBook.email}\n";
+                            File.AppendAllText(filePath, text);
+                        }
+                    }
+                    Console.WriteLine("successfully stored in file");
+                }
+                else
+                {
+                    Console.WriteLine("Address Book is Empty");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
             }
         }
     }
