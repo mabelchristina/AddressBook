@@ -6,6 +6,7 @@ namespace AddressBook
 {
     class AddressBook
     {
+        private int countCity = 0, countState = 0;
         private List<Contacts> contacts;
         private static List<Contacts> searchContacts = new List<Contacts>();
         private static List<Contacts> viewContacts = new List<Contacts>();
@@ -31,13 +32,7 @@ namespace AddressBook
                         break;
                     }
                 }
-                else
-                {
-                    break;
-                }
-
             }
-
             Console.Write("Enter Number of contacts you want to add:");
             int numOfContacts = Convert.ToInt32(Console.ReadLine());
             while (numOfContacts > 0)
@@ -126,7 +121,6 @@ namespace AddressBook
             Console.WriteLine($"Phone Number: {x.phoneNumber}");
             Console.WriteLine($"Email: {x.email}");
         }
-
         //method for editing details
         public void EditDetails()
         {
@@ -210,7 +204,6 @@ namespace AddressBook
                 Console.WriteLine("Your contact list is empty");
             }
         }
-
         //method for deleting conatcts
         public void DeleteDetails()
         {
@@ -265,11 +258,27 @@ namespace AddressBook
                     break;
                 default:
                     return;
-
             }
-
         }
-
+        public void CountByStateOrCity()
+        {
+            Console.WriteLine("1.Count by city name\n2.Count By state name\nEnter your option:");
+            switch (Convert.ToInt32(Console.ReadLine()))
+            {
+                case 1:
+                    Console.WriteLine("Enter the name of city in which you want to count persons:");
+                    string cityName = Console.ReadLine();
+                    ViewByCityName(cityName, "count");
+                    break;
+                case 2:
+                    Console.WriteLine("Enter the name of state in which you want to count persons:");
+                    string stateName = Console.ReadLine();
+                    ViewByStateName(stateName, "count");
+                    break;
+                default:
+                    return;
+            }
+        }
         public void SearchByCityName(string cityName, string personName)
         {
             if (addressBookDictionary.Count > 0)
@@ -324,7 +333,6 @@ namespace AddressBook
             {
                 Console.WriteLine("Adress book is empty");
             }
-
         }
         public void ViewDetailsByStateOrCity()
         {
@@ -335,47 +343,52 @@ namespace AddressBook
                 case 1:
                     Console.WriteLine("Enter the name of city in which you want to view:");
                     string cityName = Console.ReadLine();
-                    ViewByCityName(cityName);
+                    ViewByCityName(cityName,"view");
                     break;
                 case 2:
                     Console.WriteLine("Enter the state of city in which you want to view:");
                     string stateName = Console.ReadLine();
-                    ViewByStateName(stateName);
+                    ViewByStateName(stateName,"view");
                     break;
                 default:
                     return;
-
             }
-
         }
-
-        public void ViewByCityName(string cityName)
+        public void ViewByCityName(string cityName, string check)
         {
             if (addressBookDictionary.Count > 0)
             {
-
                 foreach (KeyValuePair<string, List<Contacts>> dict in addressBookDictionary)
                 {
                     viewContacts = dict.Value.FindAll(x => x.state.Equals(cityName));
                 }
-                if (searchContacts.Count > 0)
+                if (check.Equals("view"))
                 {
-                    foreach (var x in searchContacts)
+                    if (viewContacts.Count > 0)
                     {
-                        PrintValues(x);
+                        foreach (var x in viewContacts)
+                        {
+                            PrintValues(x);
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("No Details found ");
                     }
                 }
                 else
                 {
-                    Console.WriteLine("No Persons found");
+                    countCity = viewContacts.Count;
+                    Console.WriteLine($"The total persons in {cityName} are : {countCity}");
                 }
             }
             else
-            {
+                {
                 Console.WriteLine("Adress book is empty");
             }
         }
-        public void ViewByStateName(string stateName)
+
+        public void ViewByStateName(string stateName, string check)
         {
             if (addressBookDictionary.Count > 0)
             {
@@ -384,16 +397,25 @@ namespace AddressBook
                 {
                     viewContacts = dict.Value.FindAll(x => x.state.Equals(stateName));
                 }
-                if (searchContacts.Count > 0)
+                if (check.Equals("view"))
                 {
-                    foreach (var x in searchContacts)
+                    if (viewContacts.Count > 0)
                     {
-                        PrintValues(x);
+                        foreach (var x in viewContacts)
+                        {
+                            PrintValues(x);
+                        }
+
+                    }
+                    else
+                    {
+                        Console.WriteLine("No Details found ");
                     }
                 }
                 else
                 {
-                    Console.WriteLine("No Persons found");
+                    countState = viewContacts.Count;
+                    Console.WriteLine($"The total persons in {stateName} are : {countState}");
                 }
             }
             else
@@ -401,7 +423,5 @@ namespace AddressBook
                 Console.WriteLine("Adress book is empty");
             }
         }
-
     }
-
 }
