@@ -48,8 +48,19 @@ namespace AddressBook
                     case 10:
                         abd.WriteToFile();
                         break;
-                    
                     case 11:
+                        abd.ReadFromCSVFile();
+                        break;
+                    case 12:
+                        abd.WriteToCSVFile();
+                        break;
+                    case 13:
+                        abd.ReadFromJsonFile();
+                        break;
+                    case 14:
+                        abd.WriteToJsonFile();
+                        break;
+                    case 15:
                         // to exit from main method
                         Console.WriteLine("Exited");
                         return;
